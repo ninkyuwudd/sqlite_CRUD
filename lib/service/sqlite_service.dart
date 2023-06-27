@@ -70,11 +70,11 @@ CREATE TABLE $tableUser (
     return result.map((json) => User.fromJson(json)).toList();
   }
 
-  Future<int> update(User user) async {
+  Future<int> update(User user,int id) async {
     final db = await instane.database;
 
     return db.update(tableUser, user.toJson(),
-        where: '${UserFields.id} = ?', whereArgs: [user.id]);
+        where: '${UserFields.id} = ?', whereArgs: [id]);
   }
 
   Future<int> delete(int id) async {
