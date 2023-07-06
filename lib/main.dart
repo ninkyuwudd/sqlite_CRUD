@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sqlite_flutter_learn/provider/note_provider.dart';
 import 'package:sqlite_flutter_learn/provider/test_provider.dart';
 import 'package:sqlite_flutter_learn/provider/user_provider.dart';
 import 'package:sqlite_flutter_learn/route.dart';
 import 'package:sqlite_flutter_learn/screen/home_screen.dart';
 import 'package:sqlite_flutter_learn/screen/login_screen.dart';
+import 'package:sqlite_flutter_learn/screen/note_screen.dart';
 import 'package:sqlite_flutter_learn/screen/test/testing_dynamic_widget.dart';
 
 void main() {
@@ -20,7 +22,8 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_)=> userProvider()),
-        ChangeNotifierProvider(create: (_)=> testProvider() )
+        ChangeNotifierProvider(create: (_)=> testProvider() ),
+        ChangeNotifierProvider(create: (_)=> NoteProvider())
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -30,7 +33,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: const DynamicTexfield(),
+        home: const NoteScreen(),
         routes: Routes.route,
       ),
     );
