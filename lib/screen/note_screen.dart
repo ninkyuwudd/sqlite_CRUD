@@ -34,7 +34,12 @@ class _NoteScreenState extends State<NoteScreen> {
         child: ListView.builder(
           itemCount: getNote.length,
           itemBuilder: (context,idx){
-          return Text(getNote[idx].note);
+          return ListTile(
+            title: Text(getNote[idx].note),
+            trailing: IconButton(onPressed: (){
+              loadNote.updateNote(Note(id: getNote[idx].id,note: "edited note", createTime: DateTime.now().toString()), int.parse(getNote[idx].id.toString()));
+            }, icon:const Icon(Icons.edit))
+          );
         }),
       ),
       floatingActionButton: FloatingActionButton(onPressed: (){

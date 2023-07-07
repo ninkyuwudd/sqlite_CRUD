@@ -71,6 +71,22 @@ CREATE TABLE $tableNote(
     return result.map((json) => Note.fromJson(json)).toList();
   }
 
+  Future<int> update(Note note,int id) async{
+    final db = await instane.database;
+
+    return db.update(tableNote, note.toJson(),where: '${NoteFields.id} = ?',whereArgs: [id]);
+  }
+
+  Future<int> delete(int id) async{
+    final db = await instane.database;
+
+    return await db.delete(tableNote, where: '${NoteFields.id} = ?',whereArgs: [id]);
+  }
+
+  Future close() async{
+    final db  = await instane.database;
+    db.close();
+  }
 
 
   

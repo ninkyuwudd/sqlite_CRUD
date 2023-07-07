@@ -13,9 +13,9 @@ class NoteFields{
   static final String time = 'createTime';
 }
 
-Note noteFromJson(String str) => Note.fromJson(json.decode(str));
+// Note noteFromJson(String str) => Note.fromJson(json.decode(str));
 
-String noteToJson(Note data) => json.encode(data.toJson());
+// String noteToJson(Note data) => json.encode(data.toJson());
 
 class Note {
     int? id;
@@ -29,15 +29,15 @@ class Note {
     });
 
     factory Note.fromJson(Map<String, dynamic> json) => Note(
-        id: json["id"],
+        id: json["id"] as int?,
         note: json["note"],
         createTime: json["createTime"],
     );
 
-    Map<String, dynamic> toJson() => {
-        "id": id,
-        "note": note,
-        "createTime": createTime,
+    Map<String, Object?> toJson() => {
+        NoteFields.id: id,
+        NoteFields.note: note,
+        NoteFields.time: createTime,
     };
 
     Note copy({

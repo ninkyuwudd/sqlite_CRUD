@@ -24,4 +24,11 @@ class NoteProvider extends ChangeNotifier {
     print("Try to add notes");
     notifyListeners();
   }
+
+  Future<void> updateNote(Note note,int id) async{
+    await NoteService.instane.update(note, id);
+    refreshNote();
+    notifyListeners();
+    print("Update data");
+  }
 }
