@@ -34,11 +34,19 @@ class _NoteScreenState extends State<NoteScreen> {
         child: ListView.builder(
           itemCount: getNote.length,
           itemBuilder: (context,idx){
-          return ListTile(
-            title: Text(getNote[idx].note),
-            trailing: IconButton(onPressed: (){
-              loadNote.updateNote(Note(id: getNote[idx].id,note: "edited note", createTime: DateTime.now().toString()), int.parse(getNote[idx].id.toString()));
-            }, icon:const Icon(Icons.edit))
+          return GestureDetector(
+            onTap: (){
+              
+            },
+            child: ListTile(
+              leading: IconButton(onPressed: (){
+                loadNote.deleteNote(int.parse(getNote[idx].id.toString()));
+              }, icon: const Icon(Icons.delete)),
+              title: Text(getNote[idx].note),
+              trailing: IconButton(onPressed: (){
+                loadNote.updateNote(Note(id: getNote[idx].id,note: "edited note", createTime: DateTime.now().toString()), int.parse(getNote[idx].id.toString()));
+              }, icon:const Icon(Icons.edit))
+            ),
           );
         }),
       ),

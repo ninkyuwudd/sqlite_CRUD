@@ -31,4 +31,9 @@ class NoteProvider extends ChangeNotifier {
     notifyListeners();
     print("Update data");
   }
+
+  Future<void> deleteNote(int id) async{
+    await NoteService.instane.delete(id);
+    refreshNote();
+  }
 }
