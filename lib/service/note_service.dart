@@ -12,7 +12,7 @@ class NoteService{
 
   Future<Database> get database async{
     if(_database != null) return _database!;
-    _database = await _initDB('note.db');
+    _database = await _initDB('notes.db');
     return _database!;
   }
 
@@ -24,13 +24,14 @@ class NoteService{
   }
 
   Future _createDB(Database db, int version) async{
-      final idType = 'INTEGER PRIMARY KEY AUTOINCREMENT';
-      final textType = 'TEXT NOT NULL';
+      const idType = 'INTEGER PRIMARY KEY AUTOINCREMENT';
+      const textType = 'TEXT NOT NULL';
 
       await db.execute(
         '''
 CREATE TABLE $tableNote(
   ${NoteFields.id} $idType,
+  ${NoteFields.title} $textType,
   ${NoteFields.note} $textType,
   ${NoteFields.time} $textType
 )

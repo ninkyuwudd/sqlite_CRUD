@@ -15,7 +15,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
+    
 
     Provider.of<userProvider>(context,listen: false).refreshUser();
 
@@ -24,8 +24,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
-
     SqliteService.instane.close();
 
     super.dispose();
@@ -40,7 +38,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       appBar: AppBar(),
       body: Container(
-        margin: EdgeInsets.all(20),
+        margin: const EdgeInsets.all(20),
           child: Column(
         children: [
           const Text("Data"),
@@ -69,12 +67,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                     password: "nice123",
                                     createdTime: DateTime.now()),int.parse(getUser[idx].id.toString()));
                               },
-                              icon: Icon(Icons.edit)),
+                              icon: const Icon(Icons.edit)),
                           IconButton(
                               onPressed: () {
                                 loadUser.deleteUser(int.parse(getUser[idx].id.toString()));
                               },
-                              icon: Icon(Icons.delete)),
+                              icon: const Icon(Icons.delete)),
                         ],
                       ),
                     

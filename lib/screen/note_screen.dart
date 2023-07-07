@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sqlite_flutter_learn/model/note_model.dart';
 import 'package:sqlite_flutter_learn/provider/note_provider.dart';
+import 'package:sqlite_flutter_learn/route.dart';
+import 'package:sqlite_flutter_learn/screen/note_detail_screen.dart';
 
 class NoteScreen extends StatefulWidget {
   const NoteScreen({super.key});
@@ -36,22 +38,23 @@ class _NoteScreenState extends State<NoteScreen> {
           itemBuilder: (context,idx){
           return GestureDetector(
             onTap: (){
-              
+              Navigator.pushNamed(context, Routes.noteDetailScreen,arguments: getNote[idx]);
             },
             child: ListTile(
               leading: IconButton(onPressed: (){
                 loadNote.deleteNote(int.parse(getNote[idx].id.toString()));
               }, icon: const Icon(Icons.delete)),
-              title: Text(getNote[idx].note),
+              title: Text(getNote[idx].title),
+              subtitle: Text(getNote[idx].note),
               trailing: IconButton(onPressed: (){
-                loadNote.updateNote(Note(id: getNote[idx].id,note: "edited note", createTime: DateTime.now().toString()), int.parse(getNote[idx].id.toString()));
+                loadNote.updateNote(Note(id: getNote[idx].id,title: "Note $idx",note: "edited note", createTime: DateTime.now().toString()), int.parse(getNote[idx].id.toString()));
               }, icon:const Icon(Icons.edit))
             ),
           );
         }),
       ),
       floatingActionButton: FloatingActionButton(onPressed: (){
-        loadNote.inserNote(Note(note:"new note", createTime: DateTime.now().toString()));
+        loadNote.inserNote(Note(title: "Note",note:"new note", createTime: DateTime.now().toString()));
       },
       child: const Icon(Icons.add),
       ),
